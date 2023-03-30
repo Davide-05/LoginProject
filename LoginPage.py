@@ -4,7 +4,6 @@ import re
 import json
 
 #implementare il selezionabile
-#implementare mostra/nascondi password
 
 #prende il dict degli utenti dal file json
 def FRead():
@@ -30,6 +29,16 @@ def OnEnterNick(event):
 #prende la password con il tast enter
 def OnEnterPass(event):
     Skip1()
+
+#mostra/nasconde la password
+def HideShowPass():
+    global hide
+    if hide:
+        entryCheckPass.config(show = "")
+        hide = False
+    else:
+        entryCheckPass.config(show = "*")
+        hide = True
 
 #prende i dati dalle entry ed effettua il login
 def GetData():
@@ -155,6 +164,7 @@ def Skip2():
 
 #pagina di registrazione    
 def SignUp():
+    btHideShow.place_forget()
     lbErrorPass2.place_forget()
     lbErrorNick2.place_forget()
     lbChoice2.place_forget()
@@ -178,6 +188,7 @@ def SignUp():
 def Login():
     lbChoice2.place_forget()
     btLogin1.place_forget()
+    entryCheckPass.config(show = "*")
     entryCheckNick.place(x = 180, y = 100)
     entryCheckPass.place(x = 180, y = 200)
     lbUsr.place(x = 50, y = 96)
@@ -185,7 +196,7 @@ def Login():
     lbTitleL.place(x = 270, y = 30)
     btLogin2.place(x = 500, y = 130)
     btSignUp.place(x = 500, y = 30)
-    
+    btHideShow.place(x = 500, y = 230)
     #esegue la funzione del bottone se premuto l'enter
     entryCheckPass.bind("<Return>", OnEnterLogin)
 
@@ -198,6 +209,7 @@ def LoggedIn():
     lbTitleL.place_forget()
     btLogin2.place_forget()
     btSignUp.place_forget()
+    btHideShow.place_forget()
     lbLoggedIn.place(x = 170, y = 150)
 
 window = Tk()
@@ -205,6 +217,7 @@ window.title("SaccoGay.org")
 window.geometry("700x400+400+200")
 window.resizable(0, 0)
 nickName = ""
+hide = True
 
 entryCheckNick = Entry(window, width = 40)
 entryCheckPass = Entry(window, width = 40)
@@ -234,6 +247,7 @@ btChoice2 = Button(window, text = "genera", command = lambda: Choice2(), height 
 btSkip1 = Button(window, text = "avanti", command = lambda: Skip1(), height = 3, width = 10, bg = "grey")
 btSkip2 = Button(window, text = "avanti", command = lambda: Skip2(), height = 3, width = 10, bg = "grey")
 btNick = Button(window, text = "click", command = lambda: SkipNick(), height = 3, width = 10, bg = "grey")
+btHideShow = Button(window, text = "click", command = lambda: HideShowPass(), height = 3, width = 10, bg = "grey")
 
 #pagina di scelta se login o sign up
 lbChoice2.place(x = 270, y = 100)
