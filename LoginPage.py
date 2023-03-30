@@ -2,7 +2,7 @@ from tkinter import *
 import random
 import re
 import json
-
+#pippo negro
 #implementare il selezionabile
 #implementare mostra/nascondi password
 
